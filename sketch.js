@@ -16,10 +16,9 @@ let place = -1
 
 const levelStr = `
 XXXXXXXXXXXXXX
-XXXXXXXXX    X
-XXX          X
+XXXXX        X
 XX   2OX     X
-XX          XX
+XX           X
 XX   OX 2 X XX
 XXX         XX
 XXX  X 3XX 2XX
@@ -28,20 +27,36 @@ XX     XXXXXXX
 X  P  OXXXXXXX
 X   OO1   XXXX
 X   X     XXXX
-XXXXXXX   XXXX
+XXXXXXX  XXXXX
 XXXXXXXXXXXXXX
 `
+// const levelStr = `
+// XXXXXXXXXXXXXX 
+// XXXXX        X 
+// XX     X     X 
+// XX           X 
+// XX    X 2 X XX 
+// XXX 1       XX 
+// XXX PX 3XX 2XX 
+// XXXX    XX  XX 
+// XX     XXXXXXX 
+// X     3XXXXXXX 
+// X  2      XXXX 
+// X   X     XXXX 
+// XXXXXXX  XXXXX 
+// XXXXXXXXXXXXXX
+// `
 
 function setup() {
   const canvas = createCanvas((14*8+offset*2)*sc,(15*8+offset*2)*sc)
   canvas.parent("centered")
   ends = [
-    new End(6,3),
-    new End(5,5),
-    new End(11,8),
-    new End(6,10),
-    new End(4,11),
-    new End(5,11),
+    new End(6,2),
+    new End(5,4),
+    new End(11,7),
+    new End(6,9),
+    new End(4,10),
+    new End(5,10),
   ]
   reset()
 }
@@ -51,6 +66,8 @@ const reset = () => {
   bricks = []
   blocks = []
   let h = 0
+  const cols = [color(225,0,0),color(0,225,0),color(0,0,225),color(225,225,0),color(225,0,225),color(0,225,225)]
+  // const cols = [color(0,225,0),color(0,225,225),color(0,0,225),color(225,225,0),color(225,0,225),color(225,0,0)]
   grid.forEach(row => {
     let w = 0
     row.split("").forEach(cell => {
@@ -61,7 +78,7 @@ const reset = () => {
         case "1":
         case "2":
         case "3":
-          blocks.push(new Block(w,h,parseInt(cell)))
+          blocks.push(new Block(w,h,parseInt(cell),cols[blocks.length]))
           break
         case "P":
           player = new Player(w,h)
@@ -76,7 +93,7 @@ const reset = () => {
   const newplayer = new Player(player.x, player.y)
   const newblocks = []
   blocks.forEach(block => {
-    const newblock = new Block(block.x, block.y, block.val)
+    const newblock = new Block(block.x, block.y, block.val, block.col)
     newblocks.push(newblock)
   })
   place++
@@ -91,7 +108,7 @@ const undo = () => {
     player = new Player(p.x, p.y)
     blocks = []
     b.forEach(block => {
-      const newblock = new Block(block.x, block.y, block.val)
+      const newblock = new Block(block.x, block.y, block.val, block.col)
       blocks.push(newblock)
     })
   }
@@ -105,7 +122,7 @@ const redo = () => {
     player = new Player(p.x, p.y)
     blocks = []
     b.forEach(block => {
-      const newblock = new Block(block.x, block.y, block.val)
+      const newblock = new Block(block.x, block.y, block.val, block.col)
       blocks.push(newblock)
     })
   }
