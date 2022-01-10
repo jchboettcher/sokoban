@@ -66,8 +66,9 @@ const reset = () => {
   bricks = []
   blocks = []
   let h = 0
-  const cols = [color(225,0,0),color(0,225,0),color(0,0,225),color(225,225,0),color(225,0,225),color(0,225,225)]
+  // const cols = [color(225,0,0),color(0,225,0),color(0,0,225),color(225,225,0),color(225,0,225),color(0,225,225)]
   // const cols = [color(0,225,0),color(0,225,225),color(0,0,225),color(225,225,0),color(225,0,225),color(225,0,0)]
+  const cols = [color(0),color(0),color(0),color(0),color(0),color(0)]
   grid.forEach(row => {
     let w = 0
     row.split("").forEach(cell => {
