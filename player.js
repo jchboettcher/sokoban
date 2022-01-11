@@ -52,7 +52,7 @@ class Player {
     push()
     translate(this.x*8,this.y*8)
     fill(255)
-    rect(0,0,8,8)
+    rect(1,1,6,6)
     fill(0)
     rect(2,0,4,1)
     rect(1,1,6,1)

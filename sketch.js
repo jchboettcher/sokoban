@@ -1,4 +1,4 @@
-const offset = 7
+const offset = 2
 const sc = 4
 
 const LEFT = [-1,0]
@@ -22,10 +22,10 @@ XX           X
 XX   OX 2 X XX
 XXX         XX
 XXX  X 3XX 2XX
-XXXX  3 XX OXX
-XX     XXXXXXX
-X  P  OXXXXXXX
-X   OO1   XXXX
+XXXX  3 X  OXX
+XX     XX XXXX
+X     OXXXXXXX
+X P OO1   XXXX
 X   X     XXXX
 XXXXXXX  XXXXX
 XXXXXXXXXXXXXX
@@ -48,7 +48,7 @@ XXXXXXXXXXXXXX
 // `
 
 function setup() {
-  const canvas = createCanvas((14*8+offset*2)*sc,(15*8+offset*2)*sc)
+  const canvas = createCanvas((14*8+offset*2)*sc,(14*8+offset*2)*sc)
   canvas.parent("centered")
   ends = [
     new End(6,2),
@@ -58,6 +58,9 @@ function setup() {
     new End(4,10),
     new End(5,10),
   ]
+  textAlign(CENTER,CENTER)
+  textSize(4.5)
+  textFont("Helvetica")
   reset()
 }
 
@@ -200,10 +203,28 @@ function draw() {
   push()
   scale(sc)
   translate(offset,offset)
+  push()
+  stroke(170)
+  noFill()
+  for (let i = 3; i < 13; i++) {
+    strokeWeight(i % 3 == 0 ? 0.65 : 0.3)
+    line(i*8,16,i*8,88)
+  }
+  for (let j = 2; j < 12; j++) {
+    strokeWeight(j % 3 == 2 ? 0.65 : 0.3)
+    line(24,j*8,96,j*8)
+  }
+  noStroke()
+  fill(170)
+  textFont("Helvetica")
+  textSize(5)
+  text("2",8*4+4,8*3+4)
+  text("8",8*4+4,8*4+4)
+  pop()
   noStroke()
   fill(0)
-  ends.forEach(end => end.show())
   bricks.forEach(brick => brick.show())
+  ends.forEach(end => end.show())
   blocks.forEach(block => block.show())
   player.show()
   pop()
