@@ -28,7 +28,7 @@ class Block {
     rect(7,1,1,6)
     rect(0,7,8,1)
     textStyle(BOLD)
-    text(this.val === 1 ? "1" : this.val === 2 ? "2" : "3",4,4)
+    text(this.val.toString(),4,4)
     pop()
   }
 

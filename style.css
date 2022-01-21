@@ -18,7 +18,7 @@ h1 {
   font-style: italic;
 }
 p {
-  width: auto;
+  width: 900px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 13px;
@@ -31,5 +31,5 @@ p {
   margin-top: 18px;
 }
 .bottom {
-  margin-bottom: 45px;
+  margin-bottom: 25px;
 }

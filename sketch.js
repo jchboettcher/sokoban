@@ -64,8 +64,8 @@ function setup() {
   reset()
 }
 
-const reset = () => {
-  const grid = levelStr.substring(1,levelStr.length-1).split("\n")
+const reset = (lvlStr=levelStr) => {
+  const grid = lvlStr.substring(1,lvlStr.length-1).split("\n")
   bricks = []
   blocks = []
   let h = 0
@@ -119,7 +119,7 @@ const undo = () => {
 }
 
 const redo = () => {
-  console.log("redoing")
+  // console.log("redoing")
   if (place < history.length-1) {
     place++
     const [p,b] = history[place]
@@ -148,6 +148,12 @@ function keyPressed() {
     undo()
   } else if (key === 'x' || key === 'X') {
     redo()
+  } else if (key === 's' || key === 'S') {
+    localStorage.grid = getGrid()
+  } else if (key === 'l' || key === 'L') {
+    if (localStorage.grid) {
+      reset(localStorage.grid,true)
+    }
   } else {
       switch (keyCode) {
       case LEFT_ARROW:
@@ -166,36 +172,39 @@ function keyPressed() {
         break
     }
   }
-  printGrid()
+  // printGrid()
 }
 
-const printGrid = () => {
+const getGrid = () => {
   let grid = ""
   for (let j = 0; j < 14; j++) {
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 14; i++) {
       if (i === player.x && j === player.y) {
         grid += "P"
         continue
       }
+      let put = false
       for (let brick of bricks) {
         if (i === brick.x && j === brick.y) {
           grid += "X"
+          put = true
           break
         }
       }
       for (let block of blocks) {
         if (i === block.x && j === block.y) {
           grid += block.val.toString()
+          put = true
           break
         }
       }
-      if (grid.length % 16 != i+1) {
+      if (!put) {
         grid += " "
       }
     }
     grid += "\n"
   }
-  console.log(grid)
+  return "\n"+grid
 }
 
 function draw() {
