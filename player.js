@@ -40,7 +40,7 @@ class Player {
     const newplayer = new Player(player.x, player.y)
     const newblocks = []
     blocks.forEach(block => {
-      const newblock = new Block(block.x, block.y, block.val, block.col)
+      const newblock = new Block(block.x, block.y, block.val, block.txt)
       newblocks.push(newblock)
     })
     place++

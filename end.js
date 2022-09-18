@@ -1,8 +1,9 @@
 class End {
 
-  constructor(x, y) {
+  constructor(x, y, txt) {
     this.x = x
     this.y = y
+    this.txt = txt
   }
 
   show() {
