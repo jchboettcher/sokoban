@@ -272,9 +272,9 @@ const places = () => {
   return lst
 }
 
-const f = (h) => {
+const f = () => {
   let s = "[";
-  for ([p,bs] of h) {
+  for ([p,bs] of history) {
       s += `[new Player(${p.x},${p.y}),[`;
       for (b of bs)
           s += `new Block(${b.x},${b.y},${b.val},"${b.txt}"),`;
