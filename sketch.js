@@ -19,15 +19,15 @@ let currKey
 const levelStr = `
 XXXXXXXXXXXXXX
 XXXXX        X
-XX   2OX     X
+XX   (2A)OX     X
 XX           X
-XX   OX 2 X XX
+XX   OX (2B) X XX
 XXX         XX
-XXX  X 3XX 2XX
-XXXX  3 X  OXX
+XXX  X (3A)XX (2C)XX
+XXXX  (3B) X  OXX
 XX     XX XXXX
 X     OXXXXXXX
-X P OO1   XXXX
+X P OO(1A)   XXXX
 XX  X     XXXX
 XXXXXXX  XXXXX
 XXXXXXXXXXXXXX
@@ -78,6 +78,8 @@ const reset = (lvlStr=levelStr) => {
   order = "ABC"
   grid.forEach(row => {
     let w = 0
+    let id = ""
+    let val = 0
     row.split("").forEach(cell => {
       switch (cell) {
         case "X":
@@ -87,8 +89,14 @@ const reset = (lvlStr=levelStr) => {
         case "2":
         case "3":
           val = parseInt(cell)
-          blocks.push(new Block(w,h,val,cell+order[blockidcounters[val]]))
-          blockidcounters[val]++
+          id = cell
+          w -= 2
+          break
+        case "A":
+        case "B":
+        case "C":
+          blocks.push(new Block(w,h,val,id+cell))
+          w--
           break
         case "P":
           player = new Player(w,h)
@@ -203,7 +211,7 @@ const getGrid = () => {
       }
       for (let block of blocks) {
         if (i === block.x && j === block.y) {
-          grid += block.val.toString()
+          grid += "("+block.txt+")"
           put = true
           break
         }
