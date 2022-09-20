@@ -14,11 +14,12 @@ class Block {
     rect(1,1,6,6)
     let onDot = 0
     ends.forEach(end => {
-      if (end.x === this.x && end.y === this.y) {
-        onDot = end.txt === this.txt ? 2 : 1
+      if (end.activated && end.x === this.x && end.y === this.y) {
+        onDot = (end.txt === this.txt) ? 2 : 1
       }
     })
-    fill(onDot == 2 ? color(50,156,20) : !!onDot ? color(20,50,156) : color(0))
+    // fill(onDot == 2 ? color(50,156,20) : !!onDot ? color(156,50,20) : color(0))
+    fill(onDot == 2 ? color(79,162,12) : !!onDot ? color(192,79,12) : color(0))
     // circle(4,4,8)
     // fill(255)
     // circle(4,4,6)

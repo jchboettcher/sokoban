@@ -53,12 +53,12 @@ function setup() {
   const canvas = createCanvas((14*8+offset*2)*sc,(14*8+offset*2)*sc)
   canvas.parent("centered")
   ends = [
-    new End(6,2,"2C"),
-    new End(5,4,"2B"),
-    new End(11,7,"1A"),
     new End(6,9,"3B"),
     new End(4,10,"2A"),
     new End(5,10,"3A"),
+    new End(5,4,"2B"),
+    new End(6,2,"2C"),
+    new End(11,7,"1A"),
   ]
   textAlign(CENTER,CENTER)
   textSize(4.5)
@@ -153,6 +153,19 @@ const checkBrick = (x,y) => {
     }
   }
   return false
+}
+
+const updateEnds = () => {
+  let activated = true
+  ends.forEach(end => {
+    end.activated = activated
+    if (!activated) {
+      return
+    }
+    activated = blocks.some(block => (
+      end.txt === block.txt && end.x === block.x && end.y === block.y
+    ))
+  })
 }
 
 function keyPressed() {
@@ -250,6 +263,7 @@ function draw() {
   pop()
   noStroke()
   fill(0)
+  updateEnds()
   bricks.forEach(brick => brick.show())
   ends.forEach(end => end.show())
   blocks.forEach(block => block.show())
