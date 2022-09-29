@@ -18,7 +18,7 @@ let currKey
 
 const levelStr = `
 XXXXXXXXXXXXXX
-XXXXX        X
+XXXXX    X   X
 XX   (2A)OX     X
 XX           X
 XX   OX (2B) X XX
