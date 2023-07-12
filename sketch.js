@@ -55,10 +55,10 @@ function setup() {
   ends = [
     new End(6,9,"3B"),
     new End(4,10,"2A"),
-    new End(5,10,"3A"),
-    new End(5,4,"2B"),
-    new End(6,2,"2C"),
     new End(11,7,"1A"),
+    new End(5,10,"3A"),
+    new End(6,2,"2C"),
+    new End(5,4,"2B"),
   ]
   textAlign(CENTER,CENTER)
   textSize(4.5)
